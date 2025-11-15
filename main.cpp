@@ -146,7 +146,16 @@ void solve(arguments_struct &args) {
     auto read = chrono::steady_clock::now();
 #endif
 
-    shared_ptr<Formula> formula = ParseFormula(&args.filename).parseFormula();
+    //ALL POSSIBLE SETTINGS THAT CAN INDICATE S5 LOGIC
+    bool isS5 = (args.settings.reflexive && args.settings.euclidean) ||
+        (args.settings.symmetric && args.settings.euclidean) ||
+        (args.settings.reflexive && args.settings.symmetric && args.settings.transitive) ||
+        (args.settings.serial && args.settings.symmetric && args.settings.transitive) ||
+        (args.settings.serial && args.settings.symmetric && args.settings.euclidean);
+
+    //PASS INDICATOR INTO PARSER
+    shared_ptr<Formula> formula = ParseFormula(&args.filename, isS5).parseFormula();
+
     // string other = "a.p";
     // shared_ptr<Formula> correct = ParseFormula(&other).parseFormula();
     // cout << "Wrong" << formula->toString() << endl;
@@ -169,6 +178,7 @@ void solve(arguments_struct &args) {
     }
 
     formula = formula->negatedNormalForm();
+    
     // correct = correct->negatedNormalForm();
 
     // cout << (*formula == *correct) << endl;
@@ -343,7 +353,7 @@ void solve(arguments_struct &args) {
 
     {
         if (args.globalFilename != "") {
-            shared_ptr<Formula> gFormula = ParseFormula(&args.globalFilename).parseFormula();
+            shared_ptr<Formula> gFormula = ParseFormula(&args.globalFilename, true).parseFormula();
 
 
             if (args.valid) {
