@@ -1,5 +1,6 @@
 CC = g++
-CFLAGS = -std=c++17 -Wall -g -O3 -mavx2 -fopenmp -static 
+#CFLAGS = -std=c++17 -Wall -g -O3 -mavx2 -fopenmp -static #VM NO LIKE AVX2 INSTRUCTIONS
+CFLAGS = -std=c++17 -Wall -g -O3 -fopenmp -static 
 CFLAGS += -I/usr/local/include/antlr4-runtime
 LIBS = -L/usr/local/lib -lminisat -lantlr4-runtime 
 SRCDIR = .
@@ -25,20 +26,22 @@ ifneq ($(HAS_IPASIR),)
 endif
 
 OBJECTS_MAIN = $(filter-out ./ltlmain.o, $(SOURCES:.cpp=.o))
-OBJECTS_LTLMAIN = $(filter-out ./main.o, $(SOURCES:.cpp=.o))
+#OBJECTS_LTLMAIN = $(filter-out ./main.o, $(SOURCES:.cpp=.o))
 EXECUTABLE_MAIN = kaleidoscope
-EXECUTABLE_LTLMAIN = lumen
+#EXECUTABLE_LTLMAIN = lumen
 
-all: $(EXECUTABLE_MAIN) $(EXECUTABLE_LTLMAIN)
+all: $(EXECUTABLE_MAIN) #$(EXECUTABLE_LTLMAIN)
 
 $(EXECUTABLE_MAIN): $(OBJECTS_MAIN)
 	$(CC) $(CFLAGS) $^ -o $(EXECUTABLE_MAIN) $(LIBS)
 
-$(EXECUTABLE_LTLMAIN): $(OBJECTS_LTLMAIN)
-	$(CC) $(CFLAGS) $^ -o $(EXECUTABLE_LTLMAIN) $(LIBS)
+#$(EXECUTABLE_LTLMAIN): $(OBJECTS_LTLMAIN)
+#	$(CC) $(CFLAGS) $^ -o $(EXECUTABLE_LTLMAIN) $(LIBS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS_MAIN) $(EXECUTABLE_MAIN) $(OBJECTS_LTLMAIN) $(EXECUTABLE_LTLMAIN)
+	rm -f $(OBJECTS_MAIN) $(EXECUTABLE_MAIN) 
+#clean:
+#	rm -f $(OBJECTS_MAIN) $(EXECUTABLE_MAIN) $(OBJECTS_LTLMAIN) $(EXECUTABLE_LTLMAIN)
