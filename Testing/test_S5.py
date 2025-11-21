@@ -184,7 +184,7 @@ class KaleidoscopeTester:
 
     def Summarise_Results(self, results):
 
-        total = len(results) + 1
+        total = len(results)
         passed = sum(
             1 for result in results if result['success'] and result['matches_expected']
         )
@@ -231,7 +231,7 @@ class KaleidoscopeTester:
             print(f"No text files found in {self.test_directory}")
             return 0
         
-        print(f"Running {len(test_files) + 1} test(s) from '{self.test_directory}' directory")
+        print(f"Running {len(test_files)} test(s) from '{self.test_directory}' directory")
         print(f"Temporary files in: {self.temp_directory}")
         print("=" * 60)
         
