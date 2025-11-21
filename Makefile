@@ -1,6 +1,6 @@
 CC = g++
-#CFLAGS = -std=c++17 -Wall -g -O3 -mavx2 -fopenmp -static #VM NO LIKE AVX2 INSTRUCTIONS
-CFLAGS = -std=c++17 -Wall -g -O3 -fopenmp -static 
+CFLAGS = -std=c++17 -Wall -g -O3 -mavx2 -fopenmp -static
+#CFLAGS = -std=c++17 -Wall -g -O3 -fopenmp -static #REPLACE THE ABOVE LINE WITH THIS
 CFLAGS += -I/usr/local/include/antlr4-runtime
 LIBS = -L/usr/local/lib -lminisat -lantlr4-runtime 
 SRCDIR = .
@@ -9,8 +9,8 @@ SRCDIR = .
 # CFLAGS += -I/usr/local/include/antlr4-runtime
 #CFLAGS += -I$(ANTLR4_INCLUDE_DIR)
 
-LTL2SNF_TAR = ltl2snf-0.1.0.tar.gz
-LTL2SNF_DIR = ltl2snf-0.1.0
+#LTL2SNF_TAR = ltl2snf-0.1.0.tar.gz
+#LTL2SNF_DIR = ltl2snf-0.1.0
 
 # Check for Prover/Ipasir/libipasir.a
 HAS_IPASIR := $(wildcard Prover/Ipasir/libipasir.a)
