@@ -184,7 +184,7 @@ class KaleidoscopeTester:
 
     def Summarise_Results(self, results):
 
-        total = len(results)
+        total = len(results) + 1
         passed = sum(
             1 for result in results if result['success'] and result['matches_expected']
         )
